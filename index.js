@@ -1,5 +1,14 @@
 var express = require('express')
 var app = express()
+const MongoClient = require('mongodb').MongoClient
+
+MongoClient.connect('mongodb://localhost', (err, database) => {
+  if(err) {
+    console.log('Could not connect to mongo')
+    process.exit(1)
+  }
+  console.log('Connected to mongo')
+})
 
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
