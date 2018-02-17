@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: trunks
+    tier: client
+  name: trunks
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trunks
+      tier: client
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1 
+      maxUnavailable: 0 
+  minReadySeconds: 5
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: trunks
+        tier: client
+    spec:
+      containers:
+      - env:
+        - name: VEGETA_HOST
+          value: 35.203.169.140 
+        - name: SUBSCRIBER
+          value: 'false'
+        - name: PUBLISHER
+          value: 'true'
+        - name: CHANNEL
+          value: photosensor
+        image: registry.hub.docker.com/souranilsbu/trunks:mqtt-2.1
+        imagePullPolicy: Always
+        name: trunks
+        resources: {}
+status: {}
+
