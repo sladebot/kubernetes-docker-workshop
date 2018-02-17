@@ -2,7 +2,7 @@ var express = require('express')
 var app = express()
 const MongoClient = require('mongodb').MongoClient
 
-MongoClient.connect('mongodb://localhost', (err, database) => {
+MongoClient.connect('mongodb://dbserver', (err, database) => {
   if(err) {
     console.log('Could not connect to mongo')
     process.exit(1)
